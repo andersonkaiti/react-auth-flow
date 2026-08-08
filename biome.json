@@ -26,6 +26,9 @@
           "fix": "safe",
           "level": "warn"
         }
+      },
+      "a11y": {
+        "noLabelWithoutControl": "off"
       }
     }
   },
