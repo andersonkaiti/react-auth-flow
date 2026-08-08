@@ -1,3 +1,19 @@
+import { AppBar } from '@components/app-bar'
+import { TooltipProvider } from '@components/ui/tooltip'
+import { ThemeProvider } from '@contexts/theme-context'
+import { Router } from '@router/index'
+import { BrowserRouter } from 'react-router-dom'
+
 export function App() {
-  return <h1>Hello, World!</h1>
+  return (
+    <ThemeProvider>
+      <BrowserRouter>
+        <TooltipProvider>
+          <AppBar />
+
+          <Router />
+        </TooltipProvider>
+      </BrowserRouter>
+    </ThemeProvider>
+  )
 }
