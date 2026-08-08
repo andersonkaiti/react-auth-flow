@@ -11,6 +11,10 @@ const SignUp = lazy(() =>
   import('@pages/sign-up').then((m) => ({ default: m.SignUp })),
 )
 
+const SignIn = lazy(() =>
+  import('@pages/sign-in').then((m) => ({ default: m.SignIn })),
+)
+
 export function Router() {
   const { pathname } = useLocation()
 
@@ -19,6 +23,7 @@ export function Router() {
       <Routes>
         <Route path={routes.home} element={<Dashboard />} />
         <Route path={routes.signUp} element={<SignUp />} />
+        <Route path={routes.signIn} element={<SignIn />} />
       </Routes>
     </Suspense>
   )
