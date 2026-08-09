@@ -1,5 +1,5 @@
 import { AppBar } from '@components/app-bar'
-import { TooltipProvider } from '@components/ui/tooltip'
+import { Toaster } from '@components/ui/toast'
 import { AuthProvider } from '@contexts/auth-context'
 import { ThemeProvider } from '@contexts/theme-context'
 import { queryClient } from '@lib/query-client'
@@ -13,11 +13,11 @@ export function App() {
       <AuthProvider>
         <ThemeProvider>
           <BrowserRouter>
-            <TooltipProvider>
+            <Toaster>
               <AppBar />
 
               <Router />
-            </TooltipProvider>
+            </Toaster>
           </BrowserRouter>
         </ThemeProvider>
       </AuthProvider>
