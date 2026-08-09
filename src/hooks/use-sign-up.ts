@@ -21,30 +21,37 @@ export function useSignUp() {
 
   const navigate = useNavigate()
 
-  const { mutateAsync, isPending, isError, error } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: signUp,
   })
 
   const handleSubmit = form.handleSubmit(async ({ name, email, password }) => {
-    await mutateAsync({
-      name,
-      email,
-      password,
-    })
+    try {
+      await mutateAsync({
+        name,
+        email,
+        password,
+      })
 
-    toast.add({
-      title: 'Cadastro realizado com sucesso!',
-      type: 'success',
-    })
+      toast.add({
+        title: 'Cadastro realizado com sucesso!',
+        type: 'success',
+      })
 
-    navigate('/sign-in')
+      navigate('/sign-in')
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.add({
+          title: error.message,
+          type: 'error',
+        })
+      }
+    }
   })
 
   return {
     form,
     handleSubmit,
     isPending,
-    isError,
-    error,
   }
 }

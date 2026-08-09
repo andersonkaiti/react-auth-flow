@@ -14,8 +14,6 @@ export function SignUp() {
   const {
     handleSubmit,
     isPending,
-    isError,
-    error,
     form: {
       register,
       formState: { errors },
@@ -26,12 +24,6 @@ export function SignUp() {
     <div className="flex min-h-screen w-full flex-col p-8">
       <main className="mx-auto flex w-full max-w-4xl flex-1 flex-col justify-center gap-8">
         <h1 className="font-bold text-4xl tracking-tighter">Cadastre-se</h1>
-
-        {isError && (
-          <p className="font-normal text-destructive text-sm">
-            {error?.message}
-          </p>
-        )}
 
         <form onSubmit={handleSubmit}>
           <FieldGroup>
@@ -70,7 +62,7 @@ export function SignUp() {
             </Field>
 
             <Field>
-              <Button className="space-x-2" type="submit">
+              <Button className="space-x-2" type="submit" disabled={isPending}>
                 {isPending ? (
                   <>
                     <Loader2 className="animate-spin" />
