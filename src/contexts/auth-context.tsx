@@ -1,4 +1,5 @@
 import { toast } from '@components/ui/toast'
+import { storageKeys } from '@config/storage-keys'
 import {
   type ISignInRequest,
   signIn as signInRequest,
@@ -18,12 +19,9 @@ interface IAuthContextValue {
 
 export const AuthContext = createContext({} as IAuthContextValue)
 
-const ACCESS_TOKEN_KEY = 'accessToken'
-const REFRESH_TOKEN_KEY = 'refreshToken'
-
 export function AuthProvider({ children }: PropsWithChildren) {
   const [isSignedIn, setIsSignedIn] = useState(
-    () => !!localStorage.getItem(ACCESS_TOKEN_KEY),
+    () => !!localStorage.getItem(storageKeys.ACCESS_TOKEN_KEY),
   )
 
   const signIn = useCallback(async ({ email, password }: ISignInRequest) => {
@@ -32,8 +30,8 @@ export function AuthProvider({ children }: PropsWithChildren) {
       password,
     })
 
-    localStorage.setItem(ACCESS_TOKEN_KEY, accessToken)
-    localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken)
+    localStorage.setItem(storageKeys.ACCESS_TOKEN_KEY, accessToken)
+    localStorage.setItem(storageKeys.REFRESH_TOKEN_KEY, refreshToken)
 
     setIsSignedIn(true)
 
@@ -44,8 +42,8 @@ export function AuthProvider({ children }: PropsWithChildren) {
   }, [])
 
   const signOut = useCallback(() => {
-    localStorage.removeItem(ACCESS_TOKEN_KEY)
-    localStorage.removeItem(REFRESH_TOKEN_KEY)
+    localStorage.removeItem(storageKeys.ACCESS_TOKEN_KEY)
+    localStorage.removeItem(storageKeys.REFRESH_TOKEN_KEY)
 
     setIsSignedIn(false)
 

@@ -5,17 +5,15 @@ import {
   CardHeader,
   CardTitle,
 } from '@components/ui/card'
-import { getOrders } from '@http/get-orders'
-import { useState } from 'react'
-import { DashboardSkeleton } from './skeleton'
+import { useLeads } from '@hooks/use-leads'
+import { DashboardLeadsSkeleton } from './skeleton'
 
 export function Dashboard() {
-  const orders = getOrders()
-  const [isLoading] = useState(false)
+  const { data, isLoading } = useLeads()
 
   return (
     <div className="flex min-h-screen w-full flex-col p-8">
-      <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center gap-8">
+      <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center gap-8 pt-40">
         <div className="space-y-2">
           <h1 className="font-bold text-4xl tracking-tighter">
             Boas-vindas ao Dashboard!
@@ -24,18 +22,16 @@ export function Dashboard() {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-          {isLoading && <DashboardSkeleton />}
+          {isLoading && <DashboardLeadsSkeleton />}
 
           {!isLoading &&
-            orders.map(({ id, orderNumber, date }) => (
+            data?.leads?.map(({ id, name, email }) => (
               <Card key={id}>
                 <CardHeader>
-                  <CardTitle>Pedido {orderNumber}</CardTitle>
+                  <CardTitle>{name}</CardTitle>
                 </CardHeader>
                 <CardFooter>
-                  <CardDescription>
-                    Reaizado em: {Intl.DateTimeFormat('pt-br').format(date)}
-                  </CardDescription>
+                  <CardDescription>E-mail: {email}</CardDescription>
                 </CardFooter>
               </Card>
             ))}
