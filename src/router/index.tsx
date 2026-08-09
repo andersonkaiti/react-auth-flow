@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
+import { AuthGuard } from './auth-guard'
 import { Loading } from './loading'
 import { routes } from './routes'
 
@@ -21,9 +22,14 @@ export function Router() {
   return (
     <Suspense key={pathname} fallback={<Loading />}>
       <Routes>
-        <Route path={routes.home} element={<Dashboard />} />
-        <Route path={routes.signUp} element={<SignUp />} />
-        <Route path={routes.signIn} element={<SignIn />} />
+        <Route element={<AuthGuard isPrivate />}>
+          <Route path={routes.home} element={<Dashboard />} />
+        </Route>
+
+        <Route element={<AuthGuard />}>
+          <Route path={routes.signUp} element={<SignUp />} />
+          <Route path={routes.signIn} element={<SignIn />} />
+        </Route>
       </Routes>
     </Suspense>
   )
