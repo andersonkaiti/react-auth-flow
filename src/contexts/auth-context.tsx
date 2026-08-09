@@ -13,6 +13,7 @@ import {
 interface IAuthContextValue {
   isSignedIn: boolean
   signIn(data: ISignInRequest): Promise<void>
+  signOut(): void
 }
 
 export const AuthContext = createContext({} as IAuthContextValue)
@@ -42,9 +43,22 @@ export function AuthProvider({ children }: PropsWithChildren) {
     })
   }, [])
 
+  const signOut = useCallback(() => {
+    localStorage.removeItem(ACCESS_TOKEN_KEY)
+    localStorage.removeItem(REFRESH_TOKEN_KEY)
+
+    setIsSignedIn(false)
+
+    toast.add({
+      title: 'Deslogado(a) com sucesso!',
+      type: 'success',
+    })
+  }, [])
+
   const value: IAuthContextValue = {
     isSignedIn,
     signIn,
+    signOut,
   }
 
   return <AuthContext value={value}>{children}</AuthContext>
