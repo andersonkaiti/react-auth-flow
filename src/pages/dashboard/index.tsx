@@ -18,7 +18,7 @@ export function Dashboard() {
           <h1 className="font-bold text-4xl tracking-tighter">
             Boas-vindas ao Dashboard!
           </h1>
-          <h2 className="text-muted-foreground">Estes são os seus pedidos:</h2>
+          <h2 className="text-muted-foreground">Estes são os seus leads:</h2>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
