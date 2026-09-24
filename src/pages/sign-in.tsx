@@ -8,7 +8,9 @@ import {
 } from '@components/ui/field'
 import { Input } from '@components/ui/input'
 import { useSignIn } from '@hooks/use-sign-in'
+import { routes } from '@router/routes'
 import { Loader2 } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 export function SignIn() {
   const {
@@ -67,6 +69,16 @@ export function SignIn() {
             </Field>
           </FieldGroup>
         </form>
+
+        <p className="text-muted-foreground text-sm">
+          Não tem uma conta?{' '}
+          <Link
+            className="font-medium text-foreground underline"
+            to={routes.signUp}
+          >
+            Cadastre-se
+          </Link>
+        </p>
       </main>
     </div>
   )
