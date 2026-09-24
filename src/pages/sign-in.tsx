@@ -56,7 +56,7 @@ export function SignIn() {
             </Field>
 
             <Field>
-              <Button type="submit" disabled={isPending}>
+              <Button type="submit" disabled={isPending} isLoading={isPending}>
                 {isPending ? (
                   <>
                     <Loader2 className="animate-spin" />
